@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import ast
 import sys, os
 import errno, pathlib, re
 import datetime, time
@@ -132,15 +133,16 @@ def submit():
         ## end POST request
 
         r = response.content.decode("utf-8")
+        if(len(ast.literal_eval(r)) == 7):  #Check if there are 7 evements in the dictonary
 
-        if not args.quiet:
-            print(r)
+            if not args.quiet:
+                print(r)
 
-        if args.db:
-            save_history(target_urls, r)
+            if args.db:
+                save_history(target_urls, r)
 
 
-        time.sleep(3)
+            time.sleep(3)
 
 
 def search():
